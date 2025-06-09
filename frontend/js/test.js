@@ -1,7 +1,7 @@
 function test_model() {
-  $.getJSON("https://raw.githubusercontent.com/picopalette/phishing-detection-plugin/master/static/classifier.json", function(clfdata) {
+  $.getJSON("https://raw.githubusercontent.com/21thinh/phishing-detection-plugin/new_model/static/classifier.json", function(clfdata) {
     var rf = random_forest(clfdata);
-    $.getJSON("https://raw.githubusercontent.com/picopalette/phishing-detection-plugin/master/static/testdata.json", function(testdata) {
+    $.getJSON("https://raw.githubusercontent.com/21thinh/phishing-detection-plugin/new_model/static/testdata.json", function(testdata) {
       var X = testdata['X_test'];
       var y = testdata['y_test'];
       for(var x in X) {

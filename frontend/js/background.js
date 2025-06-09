@@ -3,7 +3,7 @@ var legitimatePercents = {};
 var isPhish = {};
 
 function fetchLive(callback) {
-  fetch('https://raw.githubusercontent.com/picopalette/phishing-detection-plugin/master/static/classifier.json', { 
+  fetch('https://raw.githubusercontent.com/21thinh/phishing-detection-plugin/new_model/static/classifier.json', { 
   method: 'GET'
   })
   .then(function(response) { 
