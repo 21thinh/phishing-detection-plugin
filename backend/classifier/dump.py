@@ -38,7 +38,7 @@ def tree_to_json(tree):
 
 def forest_to_json(forest):
     forest_json = dict()
-    forest_json['n_features'] = forest.n_features_
+    forest_json['n_features'] = forest.n_features_in_
     forest_json['n_classes'] = forest.n_classes_
     forest_json['classes'] = forest.classes_.tolist()
     forest_json['n_outputs'] = forest.n_outputs_
