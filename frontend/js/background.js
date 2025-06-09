@@ -4,7 +4,7 @@ var isPhish = {};
 var blacklistedDomains = new Set();
 
 function fetchLive(callback) {
-  fetch('https://raw.githubusercontent.com/21thinh/phishing-detection-plugin/new_model/static/classifier.json', { 
+  fetch('https://raw.githubusercontent.com/picopalette/phishing-detection-plugin/refs/heads/master/static/classifier.json', { 
   method: 'GET'
   })
   .then(function(response) { 
@@ -29,15 +29,19 @@ function fetchCLF(callback) {
 
 // Load blacklisted domains from the scraped data
 function loadBlacklistedDomains(callback) {
-  // Try to fetch from GitHub repository or local storage
-  fetch('https://raw.githubusercontent.com/picopalette/phishing-detection-plugin/master/static/blacklisted_domains.json', {
+  // Updated URL - the raw GitHub URL should work now
+  fetch('https://raw.githubusercontent.com/21thinh/phishing-detection-plugin/refs/heads/master/static/blacklisted_domains.json', {
     method: 'GET'
   })
   .then(function(response) {
-    if (!response.ok) { throw response }
+    if (!response.ok) { 
+      console.error('Failed to fetch blacklist:', response.status, response.statusText);
+      throw response;
+    }
     return response.json();
   })
   .then(function(data) {
+    console.log('Blacklist data loaded:', data);
     // Assuming the JSON structure has malicious_domains array
     if (data.malicious_domains) {
       blacklistedDomains = new Set(data.malicious_domains);
@@ -46,6 +50,7 @@ function loadBlacklistedDomains(callback) {
     }
   })
   .catch(function(error) {
+    console.error('Error loading blacklist:', error);
     // Fallback to local storage
     chrome.storage.local.get(['blacklist', 'blacklistTime'], function(items) {
       if (items.blacklist) {

@@ -147,8 +147,6 @@
         
         <div class="buttons">
             <a href="https://google.com" class="btn btn-safe">Go to Google</a>
-            <button class="btn btn-back" onclick="window.history.back()">Go Back</button>
-            <button class="btn btn-proceed" onclick="proceedAnyway()">Proceed Anyway (Not Recommended)</button>
         </div>
         
         <div class="details">
@@ -172,20 +170,11 @@
             }
         }
         
-        // Function to proceed anyway (with additional warning)
-        function proceedAnyway() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const blockedUrl = urlParams.get('blocked');
-            
-            if (confirm('⚠️ WARNING: You are about to visit a potentially dangerous website.\n\nThis site has been identified as malicious and may:\n• Steal your personal information\n• Install malware on your device\n• Attempt to defraud you\n\nAre you absolutely sure you want to continue?')) {
-                if (blockedUrl) {
-                    window.location.href = decodeURIComponent(blockedUrl);
-                }
-            }
-        }
-        
-        // Initialize the page
-        getBlockedUrl();
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize blocked URL display
+            getBlockedUrl();
+        });
     </script>
 </body>
 </html>
